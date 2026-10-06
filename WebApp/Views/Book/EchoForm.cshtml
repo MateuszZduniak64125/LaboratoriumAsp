@@ -1,0 +1,10 @@
+﻿@using WebApp.Controllers
+@{
+    ViewData["Title"] = "Form";
+}
+<form method="get" asp-controller="Book" asp-action="Echo">
+    <h2>Form</h2>
+    <p>Book name: <input type="text" name="name"/></p>
+    <p>Count: <input type="number" name="count"/></p>
+    <input type="submit" content="Send"/>  
+</form>
