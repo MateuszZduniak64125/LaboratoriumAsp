@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models;
 
 namespace WebApp.Controllers;
 
@@ -7,23 +8,25 @@ public class BookController : Controller
     // GET
     public IActionResult Index()
     {
-        return View();
+        return View(BookStoreMemory.Books);
     }
+    [HttpGet]
+    public IActionResult Create() => View(new BookFormViewModel());
 
-    public IActionResult Echo(string name, int? count)
+    [HttpPost]
+    public IActionResult Create(BookFormViewModel vm)
     {
-        if (count == null)
+        if (!ModelState.IsValid) return View(vm);                // pokaż formularz ponownie z błędami
+
+        BookStoreMemory.Books.Add(new Book
         {
-            return BadRequest(400);
-        }
-        ViewBag.Name = name;
-        ViewBag.Count = count;
-        return View();
-    }
+            Id = BookStoreMemory.Books.Max(b => b.Id) + 1,
+            Title = vm.Title, Isbn = vm.Isbn, PublicationDate = vm.PublicationDate,
+            NumPages = vm.NumPages, Price = vm.Price, Author = vm.Author
+        });
 
-    public IActionResult EchoForm()
-    {
-        return View();
+        TempData["Success"] = $"Dodano książkę „{vm.Title}”.";   // przetrwa jedno przekierowanie
+        return RedirectToAction(nameof(Index));                   // PRG: F5 nie wyśle formularza drugi raz
     }
     
 }
