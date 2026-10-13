@@ -2,7 +2,7 @@
 
 namespace WebApp.Models;
 
-public class BookFormViewModel
+public class BookFormViewModel: IValidatableObject
 {
     [Required(ErrorMessage = "Tytuł jest wymagany")]
     [StringLength(200, MinimumLength = 2, ErrorMessage = "Tytuł: 2–200 znaków")]
@@ -24,4 +24,9 @@ public class BookFormViewModel
 
     [Required, Display(Name = "Autor")]
     public string Author { get; set; } = "";
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        //w przykladach na labach jest jak trzeba to zrobic results<list>
+    }
 }
