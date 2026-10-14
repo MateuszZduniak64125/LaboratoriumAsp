@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
 
@@ -25,5 +25,19 @@ public class BookController : Controller
     {
         return View();
     }
-    
+
+    public IActionResult Sum(int a, int b)
+    {
+        return Content((a + b).ToString());
+    }
+
+    public IActionResult UserAgent()
+    {
+        return Content(Request.Headers.UserAgent.ToString());
+    }
+
+    public IActionResult Health()
+    {
+        return Json(new { status = "ok", time = DateTime.Now });
+    }
 }
