@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,3 +7,13 @@
     <a asp-controller="Home" asp-action="AgeForm">Formularz Wieku</a>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@section Scripts {
+    <script>
+        console.log("Skrypt widoku Index (Home) został pomyślnie uruchomiony.");
+    </script>
+}
+
+@section Footer {
+    <span class="ms-3 text-secondary">| Sekcja Footer z widoku Home</span>
+}

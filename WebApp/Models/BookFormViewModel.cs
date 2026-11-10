@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models;
 
@@ -19,14 +19,26 @@ public class BookFormViewModel: IValidatableObject
     [Range(1, 20000)] [Display(Name = "Liczba stron")]
     public int NumPages { get; set; } = 100;
 
-    [Range(0.01, 10000, ErrorMessage = "Cena musi być dodatnia")]
+    [Range(0.01, 10000, ErrorMessage = "Cena musi być dodatnia") ]
+    [Display(Name = "Cena")]
     public decimal Price { get; set; }
 
     [Required, Display(Name = "Autor")]
     public string Author { get; set; } = "";
 
+    [Display(Name = "Kod wydawcy")]
+    [RegularExpression(@"^[A-Z]{3}-\d{4}$", ErrorMessage = "Kod wydawcy musi mieć format 3 wielkich liter, myślnika i 4 cyfr (np. ABC-1234)")]
+    public string PublisherCode { get; set; } = "";
+
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        //w przykladach na labach jest jak trzeba to zrobic results<list>
+        var results = new List<ValidationResult>();
+
+        if (PublicationDate.HasValue && PublicationDate.Value.Year < 1900 && Price > 100)
+        {
+            results.Add(new ValidationResult("Książka sprzed 1900 r. nie może kosztować więcej niż 100 zł."));
+        }
+
+        return results;
     }
 }

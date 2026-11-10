@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models;
 
@@ -8,13 +8,15 @@ public class IsbnAttribute : ValidationAttribute
 
     public override bool IsValid(object? value)
     {
-        if (value is not string)
+        if (value is not string raw)
         {
             ErrorMessage = "ISBN nie jest lancuchem";
             return false;
         }
-        string isbn = value as string;
-        if (isbn.Length != 13 &&  isbn.Length != 10)
+
+        string isbn = raw.Replace("-", "").Replace(" ", "");
+
+        if (isbn.Length != 13 && isbn.Length != 10)
         {
             ErrorMessage = "ISBN ma niepoprawna dlugosc";
             return false;

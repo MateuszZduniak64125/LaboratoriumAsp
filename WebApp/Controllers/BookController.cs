@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
 namespace WebApp.Controllers;
@@ -21,8 +21,9 @@ public class BookController : Controller
         BookStoreMemory.Books.Add(new Book
         {
             Id = BookStoreMemory.Books.Max(b => b.Id) + 1,
-            Title = vm.Title, Isbn = vm.Isbn, PublicationDate = vm.PublicationDate,
-            NumPages = vm.NumPages, Price = vm.Price, Author = vm.Author
+            Title = vm.Title, Isbn = vm.Isbn.Replace("-", "").Replace(" ", ""), PublicationDate = vm.PublicationDate,
+            NumPages = vm.NumPages, Price = vm.Price, Author = vm.Author,
+            PublisherCode = vm.PublisherCode
         });
 
         TempData["Success"] = $"Dodano książkę „{vm.Title}”.";   // przetrwa jedno przekierowanie

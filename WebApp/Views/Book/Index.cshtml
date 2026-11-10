@@ -1,4 +1,4 @@
-﻿@model List<Book>
+@model List<Book>
 <h2>Książki</h2>
 <a asp-action="Create" class="btn btn-primary mb-3">+ Dodaj książkę</a>
 <table class="table">
@@ -10,3 +10,13 @@
     }
     </tbody>
 </table>
+
+@section Scripts {
+    <script>
+        console.log("Skrypt widoku Index (Book) został pomyślnie uruchomiony.");
+    </script>
+}
+
+@section Footer {
+    <span class="ms-3 text-secondary">| Sekcja Footer z widoku Index</span>
+}

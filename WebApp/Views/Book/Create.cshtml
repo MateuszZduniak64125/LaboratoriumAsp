@@ -1,4 +1,4 @@
-﻿@model BookFormViewModel
+@model BookFormViewModel
 <form asp-action="Create" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="mb-3">
@@ -20,16 +20,22 @@
         <label asp-for="NumPages" class="form-label"></label>
         <input asp-for="NumPages" class="form-control" />
         <span asp-validation-for="NumPages" class="text-danger"></span>
-    </div>  <div class="mb-3">
+    </div>
+    <div class="mb-3">
         <label asp-for="Price" class="form-label"></label>
         <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Author" class="text-danger"></span>
-    </div>  <div class="mb-3">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
         <label asp-for="Author" class="form-label"></label>
         <input asp-for="Author" class="form-control" />
         <span asp-validation-for="Author" class="text-danger"></span>
     </div>
-    @* Pozostałe pola dodaj analogicznie: Isbn, PublicationDate (type="date"), NumPages, Price, Author *@
+    <div class="mb-3">
+        <label asp-for="PublisherCode" class="form-label"></label>
+        <input asp-for="PublisherCode" class="form-control" />
+        <span asp-validation-for="PublisherCode" class="text-danger"></span>
+    </div>
     <button class="btn btn-primary">Zapisz</button>
 </form>
 
